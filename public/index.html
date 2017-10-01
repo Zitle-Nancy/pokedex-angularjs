@@ -50,7 +50,7 @@
                   <li class="list-group-item">
                     <strong>Type</strong>
                     <span class="pull-right">
-                      <span ng-repeat="type in pkmCtrl.pokemon.type" class="label type-{{type}}">
+                      <span ng-repeat="type in pkmCtrl.pokemon.type" class="label type-{{type | lowercase}}">
                         {{type}}
                       </span>
                     </span>
@@ -65,7 +65,12 @@
                   </li>
                   <li class="list-group-item">
                     <strong>Abilities</strong>
-                    <span class="pull-right">{{pkmCtrl.pokemon.abilities.join(', ')}}</span>
+                    <span>
+                      <ul>
+                        <li ng-repeat="ability in pkmCtrl.pokemon.abilities">      {{ability}}
+                        </li>
+                      </ul>
+                    </span>
                   </li>
                 </ul>
               </div>
