@@ -27,13 +27,24 @@
 		};
 	});
 
-	// nuevo controlador
+	// nuevo controlador oara las Tabs
 	app.controller('TabsController', function(){
 		this.tab = 1;
 		// su valor de tab, es remplazado por el parametro que reciba
 		this.selectTab = function(tab){
 			this.tab = tab;
 		};
-
 	});
+
+	// controlador para comentarios
+	app.controller('CommentsController',function(){
+		this.comments = [];
+		this.show = false;
+
+		this.toogle = function(){
+			// solo cambiamos el valor booleano
+			this.show = !this.show;
+		}
+	})
+
 })();
