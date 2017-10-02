@@ -30,7 +30,7 @@
 	// nuevo controlador
 	app.controller('TabsController', function(){
 		this.tab = 1;
-
+		// su valor de tab, es remplazado por el parametro que reciba
 		this.selectTab = function(tab){
 			this.tab = tab;
 		};
