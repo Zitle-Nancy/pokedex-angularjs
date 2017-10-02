@@ -144,7 +144,9 @@
           <!-- comments -->
           <div ng-controller="CommentsController as cmtsCtrl">
             <button ng-hide="cmtsCtrl.show" ng-click="cmtsCtrl.toogle()" class="btn btn-primary">Show comments 
-              <span class="badge">2</span>
+              <!-- se vera que incrementa, pero solamente estamos imprimiendo
+              la longitud que tendra el arreglo -->
+              <span class="badge">{{cmtsCtrl.comments.length}}</span>
             </button>
             <div ng-show="cmtsCtrl.show" class="panel panel-primary">
               <div class="panel-heading">
