@@ -53,6 +53,11 @@
 				this.comment.email = "";
 			}
 		}
+		// agregar el comentario
+		this.addComment = function(){
+			// guardamos en nuestro arreglo, de nuestro objeto de comentario 
+			this.comments.push(this.comment);
+		}
 	})
 
 })();
