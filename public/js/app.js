@@ -55,8 +55,12 @@
 		}
 		// agregar el comentario
 		this.addComment = function(){
+			//obtenemos la fecha
+			this.comment.date = Date.now();
 			// guardamos en nuestro arreglo, de nuestro objeto de comentario 
 			this.comments.push(this.comment);
+			// reseteamos nuestro objeto al darle click o sea lo limpiamos
+			this.comment = {};
 		}
 	})
 
