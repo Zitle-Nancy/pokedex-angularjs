@@ -39,11 +39,19 @@
 	// controlador para comentarios
 	app.controller('CommentsController',function(){
 		this.comments = [];
+		//almacenar los comnetarios
+		this.comment = {};
 		this.show = false;
 
 		this.toogle = function(){
 			// solo cambiamos el valor booleano
 			this.show = !this.show;
+		}
+		// funcion para limpiar la caja de texto 
+		this.anonymousChanged = function(){
+			if(this.comment.anonymous){
+				this.comment.email = "";
+			}
 		}
 	})
 
