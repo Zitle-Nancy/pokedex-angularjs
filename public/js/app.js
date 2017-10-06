@@ -27,13 +27,41 @@
 		};
 	});
 
-	// nuevo controlador
+	// nuevo controlador oara las Tabs
 	app.controller('TabsController', function(){
 		this.tab = 1;
-
+		// su valor de tab, es remplazado por el parametro que reciba
 		this.selectTab = function(tab){
 			this.tab = tab;
 		};
-
 	});
+
+	// controlador para comentarios
+	app.controller('CommentsController',function(){
+		this.comments = [];
+		//almacenar los comnetarios
+		this.comment = {};
+		this.show = false;
+
+		this.toogle = function(){
+			// solo cambiamos el valor booleano
+			this.show = !this.show;
+		}
+		// funcion para limpiar la caja de texto 
+		this.anonymousChanged = function(){
+			if(this.comment.anonymous){
+				this.comment.email = "";
+			}
+		}
+		// agregar el comentario
+		this.addComment = function(){
+			//obtenemos la fecha
+			this.comment.date = Date.now();
+			// guardamos en nuestro arreglo, de nuestro objeto de comentario 
+			this.comments.push(this.comment);
+			// reseteamos nuestro objeto al darle click o sea lo limpiamos
+			this.comment = {};
+		}
+	})
+
 })();
