@@ -156,13 +156,14 @@
                 </h1>
               </div>
               <div class="panel-body">
-                <form class="form-horizontal" role="form" ng-submit="cmtsCtrl.addComment()" novalidate>
+                <!-- de esta forma, validamos que nuestro formulario no este vacio, y que cumpla con las validaciones que se indican -->
+                <form name="commentsForm" class="form-horizontal" role="form" ng-submit="commentsForm.$valid && cmtsCtrl.addComment()" novalidate>
                   <div class="form-group">
                     <div class="col-md-12">
-                      <textarea ng-model="cmtsCtrl.comment.body" placeholder="Please tell us what you think about {{pkmCtrl.pokemon.name}}" class="form-control"></textarea>
+                      <textarea ng-model="cmtsCtrl.comment.body" placeholder="Please tell us what you think about {{pkmCtrl.pokemon.name}}" class="form-control" required></textarea>
                     </div>
                     <div class="col-md-12">
-                      <input ng-model="cmtsCtrl.comment.email" ng-disabled="cmtsCtrl.comment.anonymous" type="email" placeholder="Please enter your email address" class="form-control">
+                      <input ng-model="cmtsCtrl.comment.email" ng-disabled="cmtsCtrl.comment.anonymous" type="email" placeholder="Please enter your email address" class="form-control" ng-required="!cmtsCtrl.comment.anonymous">
                       <label>
                         <input ng-model="cmtsCtrl.comment.anonymous" ng-change="cmtsCtrl.anonymousChanged()" id="anonymous" type="checkbox">
                         Anonymous
@@ -174,6 +175,8 @@
                   </div>
                 </form>
 
+                <!-- <h2>validar {{commentsForm.$valid}}</h2> -->
+                <div ng-if="!commentsForm.$valid" class="alert alert-danger">Correo Invalido</div>
                 <blockquote ng-repeat="comment in cmtsCtrl.comments">
                   <p>{{comment.body}}</p>
                   <footer>
