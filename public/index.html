@@ -141,6 +141,7 @@
               </div>
             </div>
           </div>
+        </div>
           <!-- comments -->
           <div ng-controller="CommentsController as cmtsCtrl">
             <button ng-hide="cmtsCtrl.show" ng-click="cmtsCtrl.toogle()" class="btn btn-primary">Show comments 
@@ -182,7 +183,8 @@
                       <a href="mailto:{{comment.email}}" ng-if="!comment.anonymous">{{comment.email}}</a>
                         <em ng-if="comment.anonymous">Anonymous</em>
                         on 
-                    <span>{{comment.date}}</span>
+                      <!-- me quede aqui -->
+                    <span>{{comment.date | date :  'medium'}}</span>
                   </footer>
                 </blockquote>
                 <!-- <blockquote>
@@ -195,7 +197,6 @@
             </div>
           </div>
           <!-- /comments -->
-        </div>
       </div>
     </div>
 
