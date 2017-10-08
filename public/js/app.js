@@ -62,6 +62,47 @@
 			// reseteamos nuestro objeto al darle click o sea lo limpiamos
 			this.comment = {};
 		}
-	})
+	});
+	// creando directivas
+	app.directive('pokemonData', function(){
+		// la directiva espera que retornemos un objeto literal
+		return {
+			restrict:'E',  // typo de elemento, la E indica html
+			templateUrl:'../partials/pokemon-data.html' // indica la ruta
+		};
+	});
+
+	app.directive('pokemonImagen', function(){
+		return{
+			restrict:'E',
+			templateUrl:'../partials/pokemon-image.html'
+		};
+	});
+
+	app.directive('pokemonState', function(){
+		return{
+			restrict: 'E',
+			templateUrl:'../partials/pokemon-state.html'
+		}
+	});
+
+	app.directive('pokemonEvolution', function(){
+		return{
+			restrict:'E',
+			templateUrl:'../partials/pokemon-evolution.html'
+		}
+	});
+
+	app.directive('pokemonName', function(){
+		return{
+			// si la usamos como atributo es A
+			// restrict:'A',
+			restrict:'E',
+			templateUrl:'../partials/pokemon-name.html'
+		}
+	});
+	// creando filtros ? 
+
+
 
 })();
