@@ -9,7 +9,9 @@ body {
 .navbar-brand img {
   width: 24px;
 }
-
+.navbar-brand>img{
+  display: inline-block;
+}
 .avatar {
   max-width: 480px;
   margin-bottom: 20px;
