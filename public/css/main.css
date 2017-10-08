@@ -116,3 +116,10 @@ body {
   background-color: #ee99ac;
   border: solid 1px #9b6470;
 }
+/*poner borde a los input de acuerdo si es valido o no*/
+.ng-invalid.ng-dirty {
+  border-color:red;
+}
+.ng-valid.ng-dirty {
+  border-color: green;
+}

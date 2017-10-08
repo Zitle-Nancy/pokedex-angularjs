@@ -28,15 +28,13 @@
     <div class="container">
       <div ng-controller = "PokemonController as pkmCtrl">
         <div class="page-header">
-          <h1>{{pkmCtrl.pokemon.name | uppercase}}</h1>
-          <small>{{pkmCtrl.pokemon.species}}</small>
-          <span class="label label-primary pull-right">#{{pkmCtrl.pokemon.id}}</span>
+          <pokemon-name></pokemon-name>
+          <!-- creandola como atributo, y en el js se cambia la E por A -->
+          <!-- <div pokemon-name></div> -->
         </div>
         <div class="row">
           <div class="col-md-6">
-            <!-- ponemos la timagen, de acuerdo al nombre que tenemos en el 
-            objeto, cuidando que el nombre sea igual  lo pasamos a minusculas -->
-            <img class="avatar center-block" ng-src="img/{{pkmCtrl.pokemon.name | lowercase}}.jpg">
+            <pokemon-imagen></pokemon-imagen>
           </div>
           <div class="col-md-6" ng-controller="TabsController as tabs">
             <ul class="nav nav-tabs nav-justified">
@@ -51,159 +49,37 @@
               </li>
             </ul>
             <div class="tab-content">
-              <div ng-show="tabs.tab === 1">
-                <ul class="list-group">
-                  <li class="list-group-item">
-                    <strong>Type</strong>
-                    <span class="pull-right">
-                      <span ng-repeat="type in pkmCtrl.pokemon.type" class="label type-{{type | lowercase}}">
-                        {{type}}
-                      </span>
-                    </span>
-                  </li>
-                  <li class="list-group-item">
-                    <strong>Height</strong>
-                    <span class="pull-right">{{pkmCtrl.pokemon.height}}</span>
-                  </li>
-                  <li class="list-group-item">
-                    <strong>Weight</strong>
-                    <span class="pull-right">{{pkmCtrl.pokemon.weight}}</span>
-                  </li>
-                  <li class="list-group-item">
-                    <strong>Abilities</strong>
-                    <span>
-                      <ul>
-                        <li ng-repeat="ability in pkmCtrl.pokemon.abilities">      {{ability}}
-                        </li>
-                      </ul>
-                    </span>
-                  </li>
-                </ul>
+              <div ng-show="tabs.tab === 1" >
+                <!-- primera opcion, pero no es muy util -->
+                <!-- <div ng-include="'partials/pokemon-data.html'"></div> -->
+
+                <!-- mandamos a llamar a nuestra directiva -->
+                <pokemon-data></pokemon-data>
               </div>
               <!-- stats -->
               <div ng-show="tabs.tab === 2">
-                <ul class="list-group">
-                  <li class="list-group-item">
-                    <strong>HP</strong>
-                    <span class="badge">
-                      {{pkmCtrl.pokemon.state.hp}}
-                    </span>
-                  </li>
-                  <li class="list-group-item">
-                    <strong>Attack</strong>
-                    <span class="badge">
-                      {{pkmCtrl.pokemon.state.attack}}
-                    </span>
-                  </li>
-                  <li class="list-group-item">
-                    <strong>Defense</strong>
-                    <span class="badge">
-                      {{pkmCtrl.pokemon.state.defense}}
-                    </span>
-                  </li>
-                  <li class="list-group-item">
-                    <strong>Special Attack</strong>
-                    <span class="badge">
-                      {{pkmCtrl.pokemon.state['sp.atk']}}
-                    </span>
-                  </li>
-                  <li class="list-group-item">
-                    <strong>Special Defense</strong>
-                    <span class="badge">
-                      <!-- no entiendo, porque lo hace de esa manera -->
-                      {{pkmCtrl.pokemon.state['sp.def']}}
-                    </span>
-                  </li>
-                   <li class="list-group-item">
-                    <strong>Speed</strong>
-                    <span class="badge">
-                      {{pkmCtrl.pokemon.state.speed}}
-                    </span>
-                  </li>
-                   <li class="list-group-item">
-                    <strong>Total</strong>
-                    <span class="badge">
-                      {{pkmCtrl.pokemon.state.total}}
-                    </span>
-                  </li>
-                </ul>
+                <pokemon-state></pokemon-state>
               </div>
               <!-- evolucion -->
               <!-- este formato es el que querremos que se repita -->
-              <div ng-show="tabs.tab === 3" ngclass="text-center" ng-repeat="pokemon in pkmCtrl.pokemon.evolution" >
-                  <a href="#">
-                    <img src="./img/{{pokemon | lowercase}}.jpg" width="160">
-                    <p>
-                      <strong>{{pokemon}}</strong>
-                    </p>
-                  </a>
-                  <span ng-hide="$last" class="glyphicon glyphicon-arrow-down"></span>
+              <div ng-show="tabs.tab === 3">
+                  <pokemon-evolution></pokemon-evolution>
               </div>
             </div>
           </div>
         </div>
           <!-- comments -->
-          <div ng-controller="CommentsController as cmtsCtrl">
-            <button ng-hide="cmtsCtrl.show" ng-click="cmtsCtrl.toogle()" class="btn btn-primary">Show comments 
-              <!-- se vera que incrementa, pero solamente estamos imprimiendo
-              la longitud que tendra el arreglo -->
-              <span class="badge">{{cmtsCtrl.comments.length}}</span>
-            </button>
-            <div ng-show="cmtsCtrl.show" class="panel panel-primary">
-              <div class="panel-heading">
-                <h1 class="panel-title">Comments 
-                  <button class="close pull-right" ng-click="cmtsCtrl.toogle()">&times;</button>
-                </h1>
-              </div>
-              <div class="panel-body">
-                <!-- de esta forma, validamos que nuestro formulario no este vacio, y que cumpla con las validaciones que se indican -->
-                <form name="commentsForm" class="form-horizontal" role="form" ng-submit="commentsForm.$valid && cmtsCtrl.addComment()" novalidate>
-                  <div class="form-group">
-                    <div class="col-md-12">
-                      <textarea ng-model="cmtsCtrl.comment.body" placeholder="Please tell us what you think about {{pkmCtrl.pokemon.name}}" class="form-control" required></textarea>
-                    </div>
-                    <div class="col-md-12">
-                      <input ng-model="cmtsCtrl.comment.email" ng-disabled="cmtsCtrl.comment.anonymous" type="email" placeholder="Please enter your email address" class="form-control" ng-required="!cmtsCtrl.comment.anonymous">
-                      <label>
-                        <input ng-model="cmtsCtrl.comment.anonymous" ng-change="cmtsCtrl.anonymousChanged()" id="anonymous" type="checkbox">
-                        Anonymous
-                      </label>
-                    </div>
-                    <div class="col-md-12">
-                      <button class="btn btn-lg" type="submit">Comment</button>
-                    </div>
-                  </div>
-                </form>
-
-                <!-- <h2>validar {{commentsForm.$valid}}</h2> -->
-                <div ng-if="!commentsForm.$valid" class="alert alert-danger">Correo Invalido</div>
-                <blockquote ng-repeat="comment in cmtsCtrl.comments">
-                  <p>{{comment.body}}</p>
-                  <footer>
-                    Comment by 
-                    <!-- al negarlo, indicamos que no querremos que se muestre
-                    ese elemento cuando sea anonimo -->
-                      <a href="mailto:{{comment.email}}" ng-if="!comment.anonymous">{{comment.email}}</a>
-                        <em ng-if="comment.anonymous">Anonymous</em>
-                        on 
-                      <!-- me quede aqui -->
-                    <span>{{comment.date | date :  'medium'}}</span>
-                  </footer>
-                </blockquote>
-                <!-- <blockquote>
-                  <p>Nah, I hate it -_-</p>
-                  <footer>
-                    Comment by <em>Anonymous</em> on <span>Sep 12, 2014, 11:00:00 PM</span>
-                  </footer>
-                </blockquote> -->
-              </div>
-            </div>
-          </div>
+          <!-- <div ng-controller="CommentsController as cmtsCtrl"> -->
+            <pokemon-comments></pokemon-comments>
+          <!-- </div> -->
           <!-- /comments -->
       </div>
     </div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.1/angular.min.js"></script>
 	<script src="./js/app.js"></script>
+  <script src="./js/controllers.js"></script>
+  <script src="./js/directivas.js"></script>
+  <script src="./js/filter.js"></script>
   </body>
 </html>
