@@ -37,32 +37,32 @@
 	});
 
 	// controlador para comentarios
-	app.controller('CommentsController',function(){
-		this.comments = [];
-		//almacenar los comnetarios
-		this.comment = {};
-		this.show = false;
+	// app.controller('CommentsController',function(){
+	// 	this.comments = [];
+	// 	//almacenar los comnetarios
+	// 	this.comment = {};
+	// 	this.show = false;
 
-		this.toogle = function(){
-			// solo cambiamos el valor booleano
-			this.show = !this.show;
-		}
-		// funcion para limpiar la caja de texto 
-		this.anonymousChanged = function(){
-			if(this.comment.anonymous){
-				this.comment.email = "";
-			}
-		}
-		// agregar el comentario
-		this.addComment = function(){
-			//obtenemos la fecha
-			this.comment.date = Date.now();
-			// guardamos en nuestro arreglo, de nuestro objeto de comentario 
-			this.comments.push(this.comment);
-			// reseteamos nuestro objeto al darle click o sea lo limpiamos
-			this.comment = {};
-		}
-	});
+	// 	this.toogle = function(){
+	// 		// solo cambiamos el valor booleano
+	// 		this.show = !this.show;
+	// 	}
+	// 	// funcion para limpiar la caja de texto 
+	// 	this.anonymousChanged = function(){
+	// 		if(this.comment.anonymous){
+	// 			this.comment.email = "";
+	// 		}
+	// 	}
+	// 	// agregar el comentario
+	// 	this.addComment = function(){
+	// 		//obtenemos la fecha
+	// 		this.comment.date = Date.now();
+	// 		// guardamos en nuestro arreglo, de nuestro objeto de comentario 
+	// 		this.comments.push(this.comment);
+	// 		// reseteamos nuestro objeto al darle click o sea lo limpiamos
+	// 		this.comment = {};
+	// 	}
+	// });
 	// creando directivas
 	app.directive('pokemonData', function(){
 		// la directiva espera que retornemos un objeto literal
@@ -99,6 +99,39 @@
 			// restrict:'A',
 			restrict:'E',
 			templateUrl:'../partials/pokemon-name.html'
+		}
+	});
+
+	app.directive('pokemonComments', function(){
+		return{
+			restrict:'E',
+			templateUrl:'../partials/pokemon-comments.html',
+			controller:function(){
+				this.comments = [];
+				//almacenar los comnetarios
+				this.comment = {};
+				this.show = false;
+				this.toogle = function(){
+					// solo cambiamos el valor booleano
+					this.show = !this.show;
+				}
+				// funcion para limpiar la caja de texto 
+				this.anonymousChanged = function(){
+					if(this.comment.anonymous){
+						this.comment.email = "";
+					}
+				}
+				// agregar el comentario
+				this.addComment = function(){
+					//obtenemos la fecha
+					this.comment.date = Date.now();
+					// guardamos en nuestro arreglo, de nuestro objeto de comentario 
+					this.comments.push(this.comment);
+					// reseteamos nuestro objeto al darle click o sea lo limpiamos
+					this.comment = {};
+				}
+			},
+			controllerAs:'cmtsCtrl'
 		}
 	});
 	// creando filtros ? 
