@@ -1,5 +1,5 @@
 <button ng-hide="cmtsCtrl.show" ng-click="cmtsCtrl.toogle()" class="btn btn-primary">Show comments 
-<!-- se vera que incrementa, pero solamente estamos imprimiendo
+  <!-- se vera que incrementa, pero solamente estamos imprimiendo
   la longitud que tendra el arreglo -->
   <span class="badge">{{cmtsCtrl.comments.length}}</span>
 </button>
@@ -34,15 +34,14 @@
     <blockquote ng-repeat="comment in cmtsCtrl.comments">
       <p>{{comment.body}}</p>
       <footer>
-        Comment by 
-<!-- al negarlo, indicamos que no querremos que se muestre
-  ese elemento cuando sea anonimo -->
-  <a href="mailto:{{comment.email}}" ng-if="!comment.anonymous">{{comment.email}}</a>
-  <em ng-if="comment.anonymous">Anonymous</em>
-  on 
-  <!-- me quede aqui -->
-  <span>{{comment.date | date :  'medium'}}</span>
-</footer>
-</blockquote>
-</div>
+            Comment by 
+        <!-- al negarlo, indicamos que no querremos que se muestre
+          ese elemento cuando sea anonimo -->
+        <a href="mailto:{{comment.email}}" ng-if="!comment.anonymous">{{comment.email}}</a>
+        <em ng-if="comment.anonymous">Anonymous</em>
+        on 
+        <span>{{comment.date | date :  'medium'}}</span>
+      </footer>
+    </blockquote>
+  </div>
 </div>
