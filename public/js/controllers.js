@@ -1,5 +1,16 @@
 (function(){
 	angular.module('pokedex.controllers', [])
+	// controlador para hacer la peticion http 
+	.controller('PokedexController', ['$scope', '$http', function($scope, $http){
+		$scope.pokemons = [];
+
+		$http.get('/pokemons.json')
+		.success(function(data){
+			console.log(data);
+			$scope.pokemons = data;
+		})
+
+	}])
 	/*Crear nuestro controlador, nombre y funcion*/
 	.controller('PokemonController', function(){
 		// crearemos nuestro objeto de pokemon
