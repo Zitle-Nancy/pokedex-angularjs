@@ -3,11 +3,16 @@
 		<h1>Pokédex</h1>
 	</div>
 	<div  class="pokemon" ng-repeat="pokemon in pokemons">
+		<!-- marca error 
+			<a href="/#pokemon/{{pokemon.name | normalize}}"> -->
 		<pokemon-name></pokemon-name>
 		<pokemon-imagen></pokemon-imagen>
 		<!-- Es una forma de concatenar filtros
 			<img ng-src="{{pokemon.name | normalize | imageify}}"> -->
 			<!-- pero asi es mas correcta, desde el controlador  -->
 			<!-- <img ng-src="{{pokemon.name | imageify}}"> -->
+		<div class="text-center">
+        	<pokemon-type></pokemon-type>
+      	</div>
 	</div>
 </div>
