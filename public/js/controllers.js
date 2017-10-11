@@ -9,12 +9,11 @@
 			console.log(data);
 			$scope.pokemons = data;
 		})
-
 	}])
 	/*Crear nuestro controlador, nombre y funcion*/
-	.controller('PokemonController', function(){
+	.controller('PokemonController',['$scope', function($scope){
 		// crearemos nuestro objeto de pokemon
-		this.pokemon = {
+		$scope.pokemon = {
 			id:001,
 			name: 'Bulbasaur',
 			species:'Seed Pokemon',
@@ -33,7 +32,7 @@
 			},
 			evolution:["Bulbasaur", "Ivysaur","Venusaur"]
 		};
-	})
+	}])
 	// nuevo controlador para las Tabs
 	.controller('TabsController', function(){
 		this.tab = 1;
