@@ -16,7 +16,6 @@ body {
   max-width: 480px;
   margin-bottom: 20px;
 }
-
 .nav-tabs {
   margin-bottom: 10px;
 }
@@ -124,4 +123,16 @@ body {
 }
 .ng-valid.ng-dirty {
   border-color: green;
+}
+.pokemon {
+  padding: 20px;
+  margin-bottom: 10px;
+  border: solid 1px purple;
+  border-radius: 20px;
+}
+.pokemon:hover {
+  border:solid 3px purple;
+}
+.pokemon img {
+  width: 300px;
 }
