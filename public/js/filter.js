@@ -12,11 +12,11 @@
   			return input.toLowerCase();
   		}
   	})
-    .filter('imageify', function () {
+    .filter('imageify',['$filter', function ($filter) {
       return function (input) {
-        var url = "img/pokemons/" + input.toLowerCase() + ".jpg";
+        var url = "img/pokemons/" + $filter('normalize')(input) + ".jpg";
         return url;
       };
-    });
+    }]);
 
 })();
