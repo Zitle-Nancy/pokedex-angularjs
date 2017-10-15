@@ -8,7 +8,7 @@
   					/*crear una expresion regular que a los caracteres
   					especiales los remplace por una cadena de texto blanca*/
   					.replace(/\W+/g,'');
-  			// esta funcion debe de retonrnar el resultado
+  			// esta funcion debe de retornar el resultado
   			return input.toLowerCase();
   		}
   	})

@@ -5,7 +5,8 @@
 		'ngRoute',
 		'pokedex.controllers',
 		'pokedex.directivas',
-		'pokedex.filters'
+		'pokedex.filters',
+		'pokedex.services'
 	]);
 
 	// inyectar servicios en nuestro ejemplo, provedor

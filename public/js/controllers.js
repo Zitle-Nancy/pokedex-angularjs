@@ -1,14 +1,13 @@
 (function(){
 	angular.module('pokedex.controllers', [])
 	// controlador para hacer la peticion http 
-	.controller('PokedexController', ['$scope', '$http', function($scope, $http){
-		$scope.pokemons = [];
-
-		$http.get('/pokemons.json')
-		.success(function(data){
-			console.log(data);
+	.controller('PokedexController', ['$scope', 'pokemonServices', function($scope, pokemonServices){
+		/* invocamos a nuestro servicio, junto con el objeto
+		 * que retorna
+		 */ 
+		pokemonServices.all().then(function (data) {
 			$scope.pokemons = data;
-		})
+		});		
 	}])
 	/*Crear nuestro controlador, nombre y funcion*/
 	.controller('PokemonController',['$scope', function($scope){
