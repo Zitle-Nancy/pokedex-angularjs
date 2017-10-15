@@ -32,10 +32,26 @@
 			});
 			return deferred.promise;
 		}
+		// funcion para filtrar por tipo
+		function byType(type) {
+			type = normalize(type);
+			var deferred = $q.defer();
+
+			all().then(function (data) {
+				var results = data.filter(function(pokemon){
+					return pokemon.type.some(function (t) {
+						return normalize(t) === type;
+					});
+				});
+				deferred.resolve(results);
+			});
+			return deferred.promise;
+		}
 		// retornamos en nuestro objetos las funciones a usar
 		return {
 			all:all,
-			byName: byName
+			byName: byName,
+			byType: byType
 		};
 	}]);
 })();
