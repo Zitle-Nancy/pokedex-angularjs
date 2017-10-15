@@ -1,3 +1,5 @@
 <!-- ponemos la timagen, de acuerdo al nombre que tenemos en el 
 objeto, cuidando que el nombre sea igual  lo pasamos a minusculas -->
-<img class="avatar center-block" ng-src="img/{{pkmCtrl.pokemon.name | lowercase}}.jpg">
+<!-- <img class="avatar center-block" ng-src="img/pokemons/{{pkmCtrl.pokemon.name | lowercase}}.jpg"> -->
+
+<img class="avatar center-block" ng-src="{{pokemon.name | imageify}}">

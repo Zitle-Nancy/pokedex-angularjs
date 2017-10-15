@@ -1,0 +1,45 @@
+<div ng-controller = "PokemonController as pkmCtrl">
+  <div class="page-header">
+    <pokemon-name></pokemon-name>
+    <!-- creandola como atributo, y en el js se cambia la E por A -->
+    <!-- <div pokemon-name></div> -->
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <pokemon-imagen></pokemon-imagen>
+    </div>
+    <div class="col-md-6" ng-controller="TabsController as tabs">
+      <ul class="nav nav-tabs nav-justified">
+        <li ng-class="{active: tabs.tab === 1}">
+          <a ng-click="tabs.selectTab(1)">Pokédex</a>
+        </li>
+        <li ng-class="{active: tabs.tab === 2}">
+          <a ng-click="tabs.selectTab(2)" >Stats</a>
+        </li>
+        <li ng-class="{active: tabs.tab === 3}">
+          <a ng-click="tabs.selectTab(3)">Evolution</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div ng-show="tabs.tab === 1" >
+          <!-- primera opcion, pero no es muy util -->
+          <!-- <div ng-include="'partials/pokemon-data.html'"></div> -->
+          <!-- mandamos a llamar a nuestra directiva -->
+          <pokemon-data></pokemon-data>
+        </div>
+        <!-- stats -->
+        <div ng-show="tabs.tab === 2">
+          <pokemon-state></pokemon-state>
+        </div>
+        <!-- evolucion -->
+        <!-- este formato es el que querremos que se repita -->
+        <div ng-show="tabs.tab === 3">
+          <pokemon-evolution></pokemon-evolution>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- comments -->
+  <pokemon-comments></pokemon-comments>
+  <!-- /comments -->
+</div>

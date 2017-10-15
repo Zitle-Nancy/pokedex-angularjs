@@ -1,28 +1,38 @@
 (function(){
 	angular.module('pokedex.controllers', [])
+	// controlador para hacer la peticion http 
+	.controller('PokedexController', ['$scope','$routeParams', 'pokemonServices', function($scope, $routeParams, pokemonServices){
+		var type = $routeParams.type;
+		/* Creamos la logica de que si es por tipo filtra
+	     * si no, entonces muestra a todos
+	     */
+		if(type){
+			pokemonServices.byType(type).then(function(data) {
+				$scope.pokemons = data;
+			})
+
+		}else{
+			/* invocamos a nuestro servicio, junto con el objeto
+		 	 * que retorna
+		 	 */ 
+			pokemonServices.all().then(function (data) {
+				$scope.pokemons = data;
+			});
+		}
+
+				
+	}])
 	/*Crear nuestro controlador, nombre y funcion*/
-	.controller('PokemonController', function(){
-		// crearemos nuestro objeto de pokemon
-		this.pokemon = {
-			id:001,
-			name: 'Bulbasaur',
-			species:'Seed Pokemon',
-			type: ['Grass', 'Poison'],
-			height: '2.4',
-			weight: '15.2 lib',
-			abilities: ['Overgrow','Chlorophyll','Water Stream'],
-			state:{
-				hp:45,
-				attack:49,
-				defense:49,
-				"sp.atk":65,
-				"sp.def":65,
-				speed:45,
-				total:318
-			},
-			evolution:["Bulbasaur", "Ivysaur","Venusaur"]
-		};
-	})
+	.controller('PokemonController',['$scope','$routeParams','pokemonServices', function($scope,$routeParams,pokemonServices){
+		var name = $routeParams.name;
+		$scope.pokemon = {};
+
+		// utilizar el servicio 
+		pokemonServices.byName(name)
+		.then(function(data) {
+			$scope.pokemon = data;
+		});	
+	}])
 	// nuevo controlador para las Tabs
 	.controller('TabsController', function(){
 		this.tab = 1;
