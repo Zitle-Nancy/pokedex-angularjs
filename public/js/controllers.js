@@ -10,11 +10,12 @@
 		});		
 	}])
 	/*Crear nuestro controlador, nombre y funcion*/
-	.controller('PokemonController',['$scope','pokemonServices', function($scope, pokemonServices){
+	.controller('PokemonController',['$scope','$routeParams','pokemonServices', function($scope,$routeParams,pokemonServices){
+		var name = $routeParams.name;
 		$scope.pokemon = {};
 
 		// utilizar el servicio 
-		pokemonServices.byName('mew')
+		pokemonServices.byName(name)
 		.then(function(data) {
 			$scope.pokemon = data;
 		});	
