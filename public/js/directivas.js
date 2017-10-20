@@ -36,15 +36,28 @@
 			restrict: 'E', 
 			templateUrl:'../partials/pokemon-type.html'
 		}
-	}).directive('pokemonComments', function($scope){
+	}).directive('pokemonComments',['pokemonServices', function(pokemonServices){
 		return{
 			restrict:'E',
 			templateUrl:'../partials/pokemon-comments.html',
-			controller:function(){
-				$scope.comments = [];
+			scope: {
+				name: '@name'
+			},
+			// nos permite enlazar las propiedades del scope con la directiva
+			link: function(scope, element, attributes) {
+				attributes.$observe('name', function(value) {
+					if(value) {
+						scope.name = value;
+						scope.comments = pokemonServices.getComments(value);
+					}
+				})
+			},  // no sirve 
+			controller: function ($scope) {
+				$scope.comments = pokemonServices.getComments($scope.name);
 				//almacenar los comnetarios
 				$scope.comment = {};
 				$scope.show = false;
+
 				$scope.toogle = function(){
 					// solo cambiamos el valor booleano
 					$scope.show = !$scope.show;
@@ -59,14 +72,13 @@
 				$scope.addComment = function(){
 					//obtenemos la fecha
 					$scope.comment.date = Date.now();
-					// guardamos en nuestro arreglo, de nuestro objeto de comentario 
-					$scope.comments.push($scope.comment);
+					pokemonServices.saveComment($scope.name, $scope.comment);
+					$scope.comments = pokemonServices.getComments($scope.name);
 					// reseteamos nuestro objeto al darle click o sea lo limpiamos
 					$scope.comment = {};
 				}
-			},
-			controllerAs:'cmtsCtrl'
-		}
-	});
+			}
+		};
+	}]);
 
 })();
