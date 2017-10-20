@@ -36,33 +36,33 @@
 			restrict: 'E', 
 			templateUrl:'../partials/pokemon-type.html'
 		}
-	}).directive('pokemonComments', function(){
+	}).directive('pokemonComments', function($scope){
 		return{
 			restrict:'E',
 			templateUrl:'../partials/pokemon-comments.html',
 			controller:function(){
-				this.comments = [];
+				$scope.comments = [];
 				//almacenar los comnetarios
-				this.comment = {};
-				this.show = false;
-				this.toogle = function(){
+				$scope.comment = {};
+				$scope.show = false;
+				$scope.toogle = function(){
 					// solo cambiamos el valor booleano
-					this.show = !this.show;
+					$scope.show = !$scope.show;
 				}
 				// funcion para limpiar la caja de texto 
-				this.anonymousChanged = function(){
-					if(this.comment.anonymous){
-						this.comment.email = "";
+				$scope.anonymousChanged = function(){
+					if($scope.comment.anonymous){
+						$scope.comment.email = "";
 					}
 				}
 				// agregar el comentario
-				this.addComment = function(){
+				$scope.addComment = function(){
 					//obtenemos la fecha
-					this.comment.date = Date.now();
+					$scope.comment.date = Date.now();
 					// guardamos en nuestro arreglo, de nuestro objeto de comentario 
-					this.comments.push(this.comment);
+					$scope.comments.push($scope.comment);
 					// reseteamos nuestro objeto al darle click o sea lo limpiamos
-					this.comment = {};
+					$scope.comment = {};
 				}
 			},
 			controllerAs:'cmtsCtrl'
