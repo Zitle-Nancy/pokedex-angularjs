@@ -32,10 +32,10 @@
 			templateUrl:'../partials/pokemon-name.html'
 		}
 	}).directive('pokemonType', function() {
-		return{
-			restrict: 'E', 
-			templateUrl:'../partials/pokemon-type.html'
-		}
+	return{
+		restrict: 'E', 
+		templateUrl:'../partials/pokemon-type.html'
+	}
 	}).directive('pokemonComments',['pokemonServices', function(pokemonServices){
 		return{
 			restrict:'E',
@@ -50,7 +50,7 @@
 						scope.name = value;
 						scope.comments = pokemonServices.getComments(value);
 					}
-				})
+				});
 			},  // no sirve 
 			controller: function ($scope) {
 				$scope.comments = pokemonServices.getComments($scope.name);
@@ -67,7 +67,7 @@
 					if($scope.comment.anonymous){
 						$scope.comment.email = "";
 					}
-				}
+				};
 				// agregar el comentario
 				$scope.addComment = function(){
 					//obtenemos la fecha
@@ -76,7 +76,7 @@
 					$scope.comments = pokemonServices.getComments($scope.name);
 					// reseteamos nuestro objeto al darle click o sea lo limpiamos
 					$scope.comment = {};
-				}
+				};
 			}
 		};
 	}]);
