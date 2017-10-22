@@ -10,7 +10,6 @@
 			pokemonServices.byType(type).then(function(data) {
 				$scope.pokemons = data;
 			})
-
 		}else{
 			/* invocamos a nuestro servicio, junto con el objeto
 		 	 * que retorna
